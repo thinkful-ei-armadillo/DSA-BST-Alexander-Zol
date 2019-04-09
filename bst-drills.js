@@ -53,13 +53,16 @@ function isBST(t, min = null, max = null) {
   );
 }
 
-function testIsBst() {
-  const BST = new binary();
-  const data = [3,1,4,6,9,2,5,7];
-  data.forEach(num => {
-    BST.insert(num, num);
-  });
-  console.log(isBST(BST));
+function thirdLargestNode(t, parent = null) {
+  const rightRight = t.right.right;
+  if (t.right.right === null && t.right.left) {
+    return t.key;
+  } else if (t.right.right === null && t.left) {
+    return t.left.key;
+  } else if (t.right.right === null && !t.left) {
+    return parent.key;
+  }
+  return thirdLargestNode(t.right, t);
 }
 
-testIsBst();
+// testThirdLargestNode();
