@@ -37,21 +37,6 @@ function main(){
 
 // main();
 
-function isBST(t, min = null, max = null) {
-  if (t === null) {
-    return true;
-  }
-  console.log(t.key, min, max);
-
-  if ((max && t.key > max) || (min && t.key < min)) {
-    return false;
-  }
-
-  return (
-    isBST(t.left, min, t.key) &&
-    isBST(t.right, t.key, max)
-  );
-}
 
 function thirdLargestNode(t, parent = null) {
   const rightRight = t.right.right;
@@ -67,13 +52,48 @@ function thirdLargestNode(t, parent = null) {
 
 // testThirdLargestNode();
 
-function maintest(arr1, arr2) {
-  // let data = [5, 4, 6, 3, 1, 0, 2];
-  // [3, 1, 5, 2, 4, 6, 0]
-  const sort = (a,b) => {
-    return a - b;
-  };
-  return arr1.sort(sort).join('') === arr2.sort(sort).join('');
+function isBST(t, min = null, max = null) {
+  if (t === null) {
+    return true;
+  }
+  if ((max && t.key > max) || (min && t.key < min)) {
+    return false;
+  }
+
+  return (
+    isBST(t.left, min, t.key) &&
+    isBST(t.right, t.key, max)
+  );
+}
+
+function maintest(arr1, arr2, min, max, i1, j2, n) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  let i;
+  let j;
+
+  for (i = i1; i < arr1.length; i++) {
+    if (arr1[i] > min && arr1[i] < max) {
+      break;
+    }
+  }
+  for (j = j2; j < arr2.length; j++) {
+    if (arr2[j] > min && arr2[j] < max) {
+      break;
+    }
+  }
+
+  if (i === n && j === n) {
+    return true;
+  }
+
+  if ( (i !== n || j !== n) ) {
+    return false;
+  }
+
+  return maintest(arr1, arr2, arr1[i], max, i+1, j+1, n) {}
 }
 
 console.log(maintest([3, 5, 4, 6, 1, 0, 2], [3, 1, 5, 2, 4, 6, 0]));
