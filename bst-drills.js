@@ -66,3 +66,15 @@ function thirdLargestNode(t, parent = null) {
 }
 
 // testThirdLargestNode();
+
+function isBalanced(t){
+    if(t === null){
+        return true;
+    }
+    let left = BstHeight(t.left);
+    let right = BstHeight(t.right);
+    let diff = left - right;
+    return isBalanced(t.left) && isBalanced(t.right) && Math.abs(diff) <= 1;  
+}
+
+  
